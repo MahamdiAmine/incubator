@@ -1,0 +1,411 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+body, html {
+    background: #fff;
+}
+
+.loader-small {
+    margin-top: -30px;
+    display: none;
+}
+
+#signup {
+    display: none;
+}
+
+#splash {
+    display: none;
+}
+
+#dashboard {
+    display: none;
+}
+
+#loader {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#loader {
+    background: #333ddd;
+    height: 100vh;
+    position: relative;
+}
+
+#loader img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loader p {
+    color: #fff;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.nav-wrapper {
+    padding: 40px 100px;
+}
+
+.nav-wrapper p {
+    color: #1565c0;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: -10px;
+}
+
+.header {
+    margin-top: 50px;
+}
+
+.header .signin {
+    color: #1565c0;
+    font-size: 70px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.header .signin-text {
+    color: #616161;
+    width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 30px;
+}
+
+.form {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 70px;
+}
+
+.form .input-field input:focus + label {
+    color: #ea80fc !important;
+}
+
+.form .input-field label {
+    color: #616161 !important;
+}
+
+.form .input-field {
+    color: #616161;
+}
+
+/* label underline focus color */
+.form .input-field input:focus {
+    border-bottom: 1px solid #ea80fc !important;
+    box-shadow: 0 1px 0 0 #ea80fc !important
+}
+
+.form .signin-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form .signin-link span:hover {
+    cursor: pointer;
+}
+
+.form button {
+    display: block;
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.signin-footer {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+    color: #757575;
+}
+
+.fpwd {
+    float: left;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.signup-btn {
+    float: right;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.signup-btn:hover, .fpwd:hover {
+    color: #000;
+}
+
+#signup {
+    margin-top: -40px;
+}
+
+#signup button {
+    display: inline;
+}
+
+#signup .buttons {
+    text-align: center;
+}
+
+.upload {
+    position: absolute;
+    top: 26%;
+    left: 70%;
+}
+
+.upload img {
+}
+
+@media only screen and (max-width: 1000px) {
+    .upload {
+        top: 36%;
+        left: 80%;
+    }
+
+    .upload img {
+        height: 80px;
+        width: 80px;
+    }
+
+    .upload input {
+        height: 60px;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 1240px) {
+    .upload {
+        top: 36%;
+        left: 80%;
+    }
+
+    .upload img {
+        height: 80px;
+        width: 80px;
+    }
+
+    .upload input {
+        height: 60px;
+        font-size: 12px;
+    }
+}
+
+#splash {
+    height: 100vh;
+    padding-top: 8%;
+    background-size: 100%;
+}
+
+#splash .splash-wrapper {
+    background: #fff;
+    width: 800px;
+    min-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#splash .image {
+}
+
+#splash .hello, #splash .hello span {
+    margin: 30px 0;
+    font-size: 40px;
+}
+
+#splash .welcome {
+    font-size: 80px;
+}
+
+/*Dashboard*/
+
+#dashboard {
+    background: #f1f2f8;
+}
+
+#dashboard .sidebar {
+    background-color: #2e3e56; /*34363D*/
+    height: 100%;
+    padding: 0px;
+    position: fixed;
+    overflow-x: hidden;
+}
+
+#dashboard .name-img {
+    float: right;
+}
+
+.side-header select {
+    width: 40%;
+}
+
+.collapse-btn, .normal-btn {
+    background-color: #2e3e56;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.actv {
+    background-color: #38455e;
+}
+
+.sidebar .active {
+    background-color: #38455e;
+}
+
+.collapse-btn:hover {
+    background-color: #38455e;
+}
+
+.normal-btn:focus {
+    background-color: transparent;
+}
+
+.actv:focus, .sidebar .collapse-btn:focus {
+    outline: none;
+    background-color: #38455e;
+}
+
+.collapse-btn:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #34363D !important;
+    border-left: 4px solid #333ddd !important;
+    color: #fff;
+}
+
+.content ul li {
+    padding-left: 55px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.content ul li:hover {
+    background-color: #38455e;
+}
+
+.sidebar .logo {
+    background-color: #fff;
+    height: 80px;
+}
+
+.sidebar h4 {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-style: oblique;
+    color: #7e9d0f;
+}
+
+#dashboard .side-header {
+    background: #fff;
+    height: 80px;
+    padding: 0px !important;
+}
+
+#dashboard .side-main {
+    padding: 0px !important;
+    float: none;
+    min-height: calc(100vh - 40px);
+}
+
+.side-main .hello-name {
+    float: right;
+    line-height: 80px;
+    font-size: 16px;
+    color: #616161;
+    margin-right: 20px;
+}
+
+.side-main .hello-img {
+    float: right;
+    margin-top: 15px;
+    margin-right: 30px;
+
+}
+
+.hello-img img {
+    border-radius: 50%;
+}
+
+.side-header .logo-img {
+    margin-top: 10px;
+}
+
+.select-dropdown {
+    color: #333ddd;
+    border: none !important;
+}
+
+ul.dropdown-content.select-dropdown li span {
+    color: #333ddd;
+}
+
+.section-title {
+    color: #333ddd;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 15px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.inline {
+    display: inline !important;
+}
+
+ul.dropdown-content.select-dropdown li span {
+    color: #ef5350;
+}
+
+#signInHere {
+    color: #7cb342;
+    font-style: oblique;
+}
+
+#navigation {
+    font-size: 25px !important;
+}

@@ -1,0 +1,295 @@
+*{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	margin: 0px;
+	padding:0px;
+	
+}
+
+html,body{
+	background-color:#f3f3f4;
+	color:#676a6c;
+	height:100%;
+}
+
+.para{
+	font-size:16px;
+	padding:10px;
+}
+
+.font{
+	font-size:16px;
+}
+
+/*For success modal */
+
+#success-modal {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+}
+.modalconent {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 0px 20px 20px 20px;
+}
+
+/*End of success modal */
+
+#nav-header .brand{
+	font-family:"Times New Roman", Georgia, Serif;
+	padding-top:3px;
+	font-size:17px;
+	color:#676a6c;
+}
+
+#nav-header .brand span{
+	font-family:"Times New Roman", Georgia, Serif;
+	font-size:26px;
+	color:#676a6c;
+}
+
+.navbar-default{
+	background-color:#fff;
+}
+
+.navbar-default .navbar-toggle{
+	border-color: #1ab394;
+	background-color:#1ab394;
+}
+
+.navbar-default .icon-bar{
+	border: 1px solid white;
+}
+
+.navbar-default .navbar-toggle:hover{
+	background-color:#1ab394;
+}
+
+.navbar-default .navbar-toggle:focus{
+	background-color:#1ab394;
+}
+
+#mySidebar{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	padding:0px;
+	background-color:#2f4050;
+}
+
+#mySidebar h1{
+	color:#1f3647;
+	text-align:center;
+	margin:10px 0px;
+	font-size:25px;
+}
+
+.display-table{
+	display: table;
+	width:100%;
+	padding:0px;
+	height:100%;
+}
+.display-table-row{
+	display: table-row;
+	height:100%;
+}
+.display-table-cell{
+	display: table-cell;
+	float:none;
+	height:100%;
+}
+
+#nav-header{
+	background:white;
+	border-bottom: 1px solid #e7eaec;
+}
+
+#nav-header ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	color:#676a6c;
+}
+
+#nav-header ul li{
+	float:left;
+	margin-left:15px;
+	padding:17px 0px;
+}
+
+#nav-header .fa{
+	color:#676a6c;
+}
+
+.label-message{
+	background-color: #1ab394;
+}
+
+#nav-heder ul a{
+	text-decoration:none;
+}
+
+#nav-header .logout{
+	color:#676a6c;
+}
+
+#nav-header .logout:hover{
+	color:#676a6c;
+}
+
+#welcome{
+	margin-right:20px;
+}
+
+#nav-header ul .label{
+	position:absolute;
+	margin-top:-10px;
+	margin-left:-5px;
+}
+
+#nav-header .fixed-width{
+	width:35px;
+}
+
+.valign-top{
+	vertical-align:top;
+}
+
+#mySidebar a{
+	padding: 12px 20px;
+	text-decoration:none;
+	color:#9fb1c2;
+	font-weight:bold;
+	font-size:13px;
+	display:block;
+}
+
+#mySidebar .fa{
+	margin-right: 6px;
+}
+
+#mySidebar a:hover{
+	background-color:#293846;
+	color:#fff;
+	display:block;
+}
+
+#mySidebar .active a{
+	color:#fff;
+	background-color:#293846;
+}	
+
+#mySidebar .online-exam{	
+	background-color:#1ab394;
+}
+
+#mySidebar .online-exam a{
+	color:black;
+	background-color:#1ab394;
+}
+
+#mySidebar .online-exam a:hover{
+	color:white;
+	
+}
+
+#mySidebar .collapsable li{
+	padding-left:30px; 
+	background:#293846;
+}
+
+#mySidebar .collapsable a{
+	color:#9fb1c2;
+	font-size:12px;
+	padding:5px 10px;
+	text-decoration:none;
+	display:block;
+}
+#mySidebar .collapsable a:hover{
+	color:white;
+}
+
+#mySidebar .collapsable{
+	border-left:4px solid #1ab394;
+}
+
+$mySidebar .link > ul > li{
+	padding-bottom:10px;
+}
+
+#stu_form{
+	display:inline-block;
+}
+
+.admin-content-con{
+	margin-top:20px;
+	background-color:#fff;
+	border-top: 4px #e7eaec solid;	
+	padding:15px;
+	overflow:auto;
+}
+
+.dashbord-left-cell{
+	padding-right:5px;
+}
+
+.dashbord-right-cell{
+	padding-left:5px;
+}
+
+.admin-content-con header{
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+	padding-bottom:10px;
+}
+
+.admin-content-con h5{
+	margin:0px;
+	padding-top:3px;
+}
+
+.text-link{
+	color: #676a6c;
+}
+
+.text-link:hover{
+	color: #676a6c;
+}
+
+.commenter-name-dash{
+	font-weight:bold;
+	font-size:13px;
+}
+
+.comment-head-dash{
+	margin-bottom:6px;
+}
+
+.comment-dash{
+	margin-bottom:5px;
+}
+
+.comment-date-dash{
+	color:#999;
+}
+
+.modal-dialog{
+	margin-top:10%;!important;
+}
+
+.logout{
+	background:none;
+	border:none;
+	outline:none;
+}
+

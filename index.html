@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=0.8">
+    <meta charset="UTF-8">
+    <title>Addi's Egg Incubator</title>
+    <link rel="stylesheet" href="css/mat.css">
+    <link rel="stylesheet" href="css/datatables.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/batch.css">
+    <link rel="stylesheet" href="css/stats.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+<body>
+<div id="loader">
+    <img src="images/loader.gif">
+    <p class="flow-text">A moment please</p>
+</div>
+<div class="nav-wrapper">
+
+    <p><img src="images/logo.jpg" height="54" width="54">Addi</p>
+</div>
+
+<div class="header">
+    <div id="signin">
+        <div class="signin">Sign in</div>
+        <div class="signin-text">Hello! Sign in and start managing your incubator.</div>
+        <div class="form">
+            <div class="input-field">
+                <input id="email" type="text" value="aminov@esi.dz">
+                <label for="email">Email</label>
+            </div>
+            <div class="input-field">
+                <input id="password" type="password" value="aminov@esi.dz">
+                <label for="password">Password</label>
+            </div>
+            <button id="signin-submit" class="btn waves-effect waves-light purple accent-1" type="submit" name="action">
+                SIGn in
+            </button>
+        </div>
+        <div class="signin-footer">
+            <span class="fpwd">Forgot Password?</span>
+            <span class="signup-btn">Sign Up!</span>
+        </div>
+    </div>
+
+    <div id="signup">
+        <div class="signin">Sign Up</div>
+        <div class="signin-text">Hello! Lets get started</div>
+        <div class="form">
+            <div class="input-field">
+                <input id="mail" type="text">
+                <label for="mail">Email*</label>
+            </div>
+            <p id="error_email"></p>
+            <div class="input-field">
+                <input id="name" type="text">
+                <label for="name">Name*</label>
+            </div>
+            <div class="input-field">
+                <input id="mobile" type="text">
+                <label for="mobile">Mobile*</label>
+            </div>
+            <div class="input-field">
+                <input id="mobile2" type="text">
+                <label for="mobile2">Other Mobile</label>
+            </div>
+            <div class="input-field">
+                <input id="reg" type="text">
+                <label for="reg">Address* </label>
+            </div>
+            <div class="input-field">
+                <input id="pwd" type="password">
+                <label for="pwd">Password*</label>
+            </div>
+            <p id="message_pwd"></p>
+            <div class="input-field">
+                <input id="cpwd" type="password">
+                <label for="cpwd">Confirm Password*</label>
+            </div>
+            <p id="message_cpwd"></p>
+
+            <div class="buttons">
+                <button class="btn waves-effect waves-light purple accent-1" type="submit" id="signup-submit"
+                        name="action">SIGn
+                    up
+                </button>
+            </div>
+            <p class="signin-link">Already signed up? Sign in <span id="signInHere">here.</span></p>
+
+            <div class="upload">
+                <img src="images/account-logo.png" id="img-preview" height="120" width="120"><br>
+                <input type="file" name="pic" id="pic" onchange="loadFile(event)" accept="image/*">
+                <p id="filepath"></p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="splash">
+    <div class="splash-wrapper">
+        <img class="image" src="images/doc.png" height="160" width="160">
+        <div class="hello">Hello, <br>Mr . <span id="drname">Debpritam</span></div>
+        <div class="welcome">Welcome to</div>
+        <img class="logo" src="images/company-logo.png" height="100" width="200">
+    </div>
+</div>
+
+<div id="dashboard">
+    <div class="container-fluid">
+        <div class="row" style="margin-bottom: 0px!important;">
+            <div class="col s2 sidebar">
+                <h4 id="navigation">Navigation</h4>
+                <button class="normal-btn actv" id="dashboard-nav">Dashboard</button>
+                <button class="collapse-btn" id="batch-nav">Batch Database</button>
+                <div class="content">
+                    <ul>
+                        <li id="add-batch-btn">Add A Batch</li>
+                        <li id="view-batch-btn">View All Batches</li>
+                        <li id="view-batch17-btn">Batches in First step</li>
+                        <li id="view-batch21-btn">Batches in Second step</li>
+                    </ul>
+                </div>
+                <button class="collapse-btn" id="contacts-nav">Quick Contacts</button>
+                <div class="content">
+                    <ul>
+                        <li id="show-stats-btn">Stats</li>
+                        <li>Other Section</li>
+                        <li>Something</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s10 side-main">
+
+                <div class="side-header z-depth-1">
+                    <img class="logo-img" src="images/company-logo.png" height="60" width="180">
+                    <!--<div class="hello-img"><img class="" src="images/doc.png" height="50" width="50"></div>-->
+                    <div class="hello-img"><img class="" id="user-image" height="50" width="50"></div>
+                    <div class="hello-name">Hello, Mr. <span class="doc-name"></span></div>
+                    <!--<div class="input-field col s2" style="float: right; width: 200px; margin-top: 17px;">-->
+                    <!--<select id="chamber-select">-->
+                    <!--<option value="" disabled selected style="color:#333ddd!important;">Choose Chamber</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                </div>
+
+                <!----------------------------------------BATCH----------------------------------------------->
+                <div id="add-batch">
+                    <div id="batch-wrap" class="z-depth-2">
+                        <div class="batch-title">Add new batch</div>
+                        <div class="batch-form">
+                            <div class="input-field">
+                                <input id="batch_id" type="number">
+                                <label for="batch_id">Batch Id</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="incubator_id" type="number">
+                                <label for="incubator_id">Incubator Id</label>
+                            </div>
+                            <!--to enter the date-->
+                            <div>
+                                <label for="batch_start_date">Select the starting Date</label>
+                                <div class="input-field">
+                                    <input id="batch_start_date" type="datetime-local" onchange="changeDate(0)"/>
+                                </div>
+                            </div>
+                            <!--set the date after 17 days-->
+                            <div>
+                                <label for="batch_17_date">The Date After 17 days </label>
+                                <div class="input-field">
+                                    <input id="batch_17_date" type="datetime-local" readonly>
+                                </div>
+                            </div>
+                            <!--set the date after 21 days-->
+                            <div>
+                                <label for="batch_4_date">The Date After 21 days</label>
+                                <div class="input-field">
+                                    <input id="batch_4_date" type="datetime-local" readonly>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="responsible">The Responsible</label>
+                                <div class="input-field">
+                                    <select id="responsible">
+                                        <option value="0" disabled selected>Choose</option>
+                                        <option value="Addi Fouaz">Addi Fouaz</option>
+                                        <option value="Mahamdi Amine">Mahamdi Amine</option>
+                                        <option value="Other">Other</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="state">Batch State</label>
+                                <div class="input-field">
+                                    <select id="state">
+                                        <option value="0" disabled selected>Choose</option>
+                                        <option value="FIRST STEP">Not Ready</option>
+                                        <option value="FIRST STEP">First State (17 days)</option>
+                                        <option value="SECOND STEP">Second State (4 days)</option>
+                                        <option value="OVER">OVER</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <input id="egg_plaques_number" type="number">
+                                <label for="egg_plaques_number">Egg Plaques Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="egg_number" type="number">
+                                <label for="egg_number">Total Egg Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="broken_egg_number" type="number">
+                                <label for="broken_egg_number">Broken Egg Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="notes" type="text">
+                                <label for="notes">notes to add !</label>
+                            </div>
+                            <img id="loader_batch_add" class="loader-small" src="images/loader-small.gif" height="100"
+                                 width="100">
+                            <button id="batch-add-submit" class="btn waves-effect waves-light blue">Save</button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="edit-batch">
+                    <div id="edit-batch-wrap" class="z-depth-2">
+                        <div class="batch-title">Edit this batch</div>
+                        <div class="batch-form">
+                            <div class="input-field">
+                                <input id="edit-batch_id" type="text">
+                                <label for="edit-batch_id">Batch Id</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="edit-incubator_id" type="text">
+                                <label for="edit-incubator_id">Incubator Id</label>
+                            </div>
+                            <!--to enter the date-->
+                            <div>
+                                <label for="edit-batch_start_date">Select the starting Date</label>
+                                <div class="input-field">
+                                    <input id="edit-batch_start_date" type="datetime-local" onchange="changeDate(1)"/>
+                                </div>
+                            </div>
+                            <!--set the date after 17 days-->
+                            <div>
+                                <label for="edit-batch_17_date">The Date After 17 days </label>
+                                <div class="input-field">
+                                    <input id="edit-batch_17_date" type="datetime-local" readonly>
+                                </div>
+                            </div>
+                            <!--set the date after 21 days-->
+                            <div>
+                                <label for="edit-batch_4_date">The Date After 21 days</label>
+                                <div class="input-field">
+                                    <input id="edit-batch_4_date" type="datetime-local" readonly>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="edit-responsible">The Responsible</label>
+                                <div class="input-field">
+                                    <select id="edit-responsible">
+                                        <option value="0" disabled selected>Choose</option>
+                                        <option value="Addi Fouaz">Addi Fouaz</option>
+                                        <option value="Mahamdi Amine">Mahamdi Amine</option>
+                                        <option value="Other">Other</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="edit-responsible">Batch State</label>
+                                <div class="input-field">
+                                    <select id="edit-state">
+                                        <option value="0" disabled selected>Choose</option>
+                                        <option value="FIRST STEP">Not Ready</option>
+                                        <option value="FIRST STEP">First State (17 days)</option>
+                                        <option value="SECOND STEP">Second State (4 days)</option>
+                                        <option value="OVER">OVER</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <input id="edit-egg_plaques_number" type="text">
+                                <label for="edit-egg_plaques_number">Egg Plaques Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="edit-egg_number" type="text">
+                                <label for="edit-egg_number">Total Egg Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="edit-broken_egg_number" type="text">
+                                <label for="edit-broken_egg_number">Broken Egg Number</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="edit-notes" type="text">
+                                <label for="edit-notes">notes to add !</label>
+                            </div>
+                            <img id="edit-loader_batch_add" class="loader-small" src="images/loader-small.gif"
+                                 height="100"
+                                 width="100">
+                            <button id="batch-update" class="btn waves-effect waves-light blue">Update</button>
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="view-batch" class="z-depth-2">
+                    <div class="section-title">View Batches</div>
+                    <div class="table_wrap">
+                        <table id="tableAll" class="display" data-page-length='15'>
+                            <thead>
+                            <tr>
+                                <th>Batch Id</th>
+                                <th>Incubator Id</th>
+                                <th class="dates">StartingDate</th>
+                                <th class="dates">DateAfter 17 days</th>
+                                <th class="dates">DateAfter 21 days</th>
+                                <th>Responsible</th>
+                                <th>State</th>
+                                <th>Plaques Number</th>
+                                <th>Total Egg Number</th>
+                                <th>Broken Egg Number</th>
+                                <th>Notes</th>
+                                <th id="actionCell">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="view-batch17" class="z-depth-2">
+                    <div class="section-title">Batches in FIRST STEP</div>
+                    <div class="table_wrap">
+                        <table id="table17" class="display" data-page-length='15'>
+                            <thead>
+                            <tr>
+                                <th>Batch Id</th>
+                                <th>Incubator Id</th>
+                                <th>Starting Date</th>
+                                <th>DateAfter 17 days</th>
+                                <th>DateAfter 21 days</th>
+                                <th>Responsible</th>
+                                <th>State</th>
+                                <th>Plaques Number</th>
+                                <th>Total Egg Number</th>
+                                <th>Broken Egg Number</th>
+                                <th>Notes</th>
+                                <th id="remainingTime">Remaining Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="view-batch21" class="z-depth-2">
+                    <div class="section-title"> Batches in SECOND STEP</div>
+                    <div class="table_wrap">
+                        <table id="table21" class="display" data-page-length='15'>
+                            <thead>
+                            <tr>
+                                <th>Batch Id</th>
+                                <th>Incubator Id</th>
+                                <th>Starting Date</th>
+                                <th>DateAfter 17 days</th>
+                                <th>DateAfter 21 days</th>
+                                <th>Responsible</th>
+                                <th>State</th>
+                                <th>Plaques Number</th>
+                                <th>Total Egg Number</th>
+                                <th>Broken Egg Number</th>
+                                <th>Notes</th>
+                                <th id="remainingTime1">Remaining Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-------------------------------------Stats----------------------------------------->
+
+                <section id="counter-stats" class="wow fadeInRight" data-wow-duration="1.4s">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-3 stats">
+                                <i class="fa fa-code" aria-hidden="true"></i>
+                                <div class="counting" data-count="900000">0</div>
+                                <h5>Lines of code</h5>
+                            </div>
+
+                            <div class="col-lg-3 stats">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                <div class="counting" data-count="280">0</div>
+                                <h5>Projects done</h5>
+                            </div>
+
+                            <div class="col-lg-3 stats">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <div class="counting" data-count="75">0</div>
+                                <h5>Happy clients</h5>
+                            </div>
+
+                            <div class="col-lg-3 stats">
+                                <i class="fa fa-coffee" aria-hidden="true"></i>
+                                <div class="counting" data-count="999">0</div>
+                                <h5>Cups of coffee</h5>
+                            </div>
+
+
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>    window.$ = window.jQuery = require("./js/jquery.js");</script>
+
+<script src="js/jquery.js"></script>
+<script src="js/mat.js"></script>
+<script src="js/datatables.js"></script>
+<script src="js/index.js"></script>
+<script src="js/date-utils.js"></script>
+<script src="js/batch-utils.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/database/db.js"></script>
+<script src="js/authentication/authentication.js"></script>
+<script src="js/controls/addBatch.js"></script>
+<script src="js/controls/viewBatch.js"></script>
+<script src="js/controls/editBatch.js"></script>
+<script src="js/controls/printBatch.js"></script>
+
+<script>
+    // global vars
+
+    const fs = require('fs');
+    const isDev = require('electron-is-dev');
+    const remote = require('electron').remote;
+    const {dialog} = require('electron').remote;
+    const app = remote.app;
+    let appPath = app.getAppPath();
+    let db_path = '';
+    let mode = '';
+    let daysForStep1 = 17;
+    let daysForStep2 = 21;
+
+    if (isDev) {
+        mode = "dev";
+        db_path = './db/frloum.db';
+
+    } else {
+        mode = "prod";
+        // db_path = './resources/db/frloum.db';
+        db_path='./db/frloum.db';
+    }
+    console.log("Mode = " + mode);
+    console.log("db path = " + db_path);
+    console.log("app path = " + appPath);
+    console.log("dir name = " + __dirname);
+    console.log("remote.app.getAppPath(): ", remote.app.getAppPath());
+    console.log("remote.app.getPath('appData'): ", remote.app.getPath('appData'));
+
+
+    // You can also require other files to run in this process
+    // require('./renderer.js');
+    require('./js/authentication/authentication.js');
+
+    $(document).ready(function () {
+        $('select').formSelect();
+    });
+
+    $('select[name=example_length]').formSelect();
+
+    $(document).ready(function () {
+        $('.collapsible').collapsible();
+    });
+
+    $(document).ready(function () {
+
+        document.getElementById("add-batch").classList.add("hidden");
+        document.getElementById("edit-batch").classList.add("hidden");
+        document.getElementById("view-batch").classList.add("hidden");
+        document.getElementById("view-batch17").classList.add("hidden");
+        document.getElementById("view-batch21").classList.add("hidden");
+        document.getElementById("counter-stats").classList.add("hidden");
+
+    });
+</script>
+</body>
+
+</html>

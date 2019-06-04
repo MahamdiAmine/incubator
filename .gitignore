@@ -1,0 +1,10 @@
+release-builds/
+release-builds1/
+node_modules/
+resources/
+package-lock.json
+.idea/
+.vscode/
+db/
+images/
+engine/
