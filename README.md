@@ -54,7 +54,6 @@ npm start
 # Build packager
 -----
 *For Linux: npm run package-linux
-*For Windows: npm run package-win64
 *For Mac-OS: not tested.
 
 # Authors
