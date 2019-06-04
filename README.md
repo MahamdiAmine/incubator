@@ -34,7 +34,6 @@ Electron, child_process, python3 backend, sqlite3, jsPDF, spawn, file-exec, data
 
 # Usage
 -----
-
 ```
  $ git clone https://github.com/MahamdiAmine/incubator.git
  $ cd incubator
@@ -60,8 +59,7 @@ npm start
 
 # Authors
 -----
-
-* Mahamdi Mohammed 
+* Mahamdi Amine 
 https://github.com/MahamdiAmine
 
 

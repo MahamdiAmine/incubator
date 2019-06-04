@@ -34,11 +34,11 @@
         <div class="signin-text">Hello! Sign in and start managing your incubator.</div>
         <div class="form">
             <div class="input-field">
-                <input id="email" type="text" value="aminov@esi.dz">
+                <input id="email" type="text">
                 <label for="email">Email</label>
             </div>
             <div class="input-field">
-                <input id="password" type="password" value="aminov@esi.dz">
+                <input id="password" type="password">
                 <label for="password">Password</label>
             </div>
             <button id="signin-submit" class="btn waves-effect waves-light purple accent-1" type="submit" name="action">
@@ -468,7 +468,6 @@
     let mode = '';
     let daysForStep1 = 17;
     let daysForStep2 = 21;
-
     if (isDev) {
         mode = "dev";
         db_path = './db/frloum.db';
@@ -476,7 +475,7 @@
     } else {
         mode = "prod";
         // db_path = './resources/db/frloum.db';
-        db_path='./db/frloum.db';
+        db_path = './db/frloum.db';
     }
     console.log("Mode = " + mode);
     console.log("db path = " + db_path);
@@ -484,7 +483,6 @@
     console.log("dir name = " + __dirname);
     console.log("remote.app.getAppPath(): ", remote.app.getAppPath());
     console.log("remote.app.getPath('appData'): ", remote.app.getPath('appData'));
-
 
     // You can also require other files to run in this process
     // require('./renderer.js');
