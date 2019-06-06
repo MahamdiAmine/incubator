@@ -1,5 +1,5 @@
 
-#tasksTable {
+#tasksList {
     background-color: #fff;
     min-height: 600px;
     width: 90%;
@@ -7,7 +7,7 @@
     border-top: 4px solid #e8e8e8;
 }
 
-#tasksTable .section-title {
+#tasksList .section-title {
     color: #e57373;
     /*color: grey;*/
     font-size: 16px;
@@ -16,26 +16,26 @@
     border-bottom: 1px solid #e8e8e8;
 }
 
-#tasksTable .table_wrap {
+#tasksList .table_wrap {
     width: 90%;
     margin: 15px auto;
     overflow: auto;
 }
 
-#tasksTable input {
+#tasksList input {
     border: 2px solid #eee;
 }
 
-#tasksTable #example_length {
+#tasksList #example_length {
     display: none;
 }
 
-#tasksTable input:focus {
+#tasksList input:focus {
     border: 2px solid #eee !important;
     box-shadow: none !important;
 }
 
-#tasksTable #example1_length {
+#tasksList #example1_length {
     display: none;
 }
 
