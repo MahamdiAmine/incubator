@@ -12,14 +12,14 @@ function createDB() {
     password text NOT NULL
 );
 CREATE TABLE IF NOT EXISTS Batch (
-    id integer NOT NULL PRIMARY KEY,
+    id integer PRIMARY KEY AUTOINCREMENT,
     incubatorId integer NOT NULL,
+    containers text NOT NULL,
     startingDate text NOT NULL,
     date17 text NOT NULL,
     date21 text NOT NULL,
     responsible text NOT NULL,
-    state text NOT NULL ,
-    eggPlaques integer NOT NULL,
+    NoFailedHatching integer NOT NULL,
     totalEggNumber integer NOT NULL,
     brokenEggNumber integer NOT NULL,
     notes text NOT NULL
@@ -56,96 +56,81 @@ CREATE TABLE IF NOT EXISTS Tasks (
     });
 }
 
-function insertDataToBatch(id, incubatorId, d1, d2, d3, responsible, state, eggPlaques, totalEggNumber,
+function insertDataToBatch(incubatorId, containers, d1, d2, d3, responsible, NoFailedHatching, totalEggNumber,
                            brokenEggNumber, notes, action) {
-    let query = "INSERT into Batch(id,incubatorId,startingDate,date17,date21,responsible," +
-        "state,eggPlaques,totalEggNumber,brokenEggNumber,notes)" +
-        "VALUES (" + id + "," + incubatorId + ",\"" + d1 + "\",\"" + d2 + "\",\"" + d3 + "\",\"" + responsible
-        + "\",\"" + state + "\"," + eggPlaques + "," + totalEggNumber + "," + brokenEggNumber + ",\"" + notes + "\")";
+    let query = "INSERT into Batch(incubatorId,containers,startingDate,date17,date21,responsible," +
+        "NoFailedHatching,totalEggNumber,brokenEggNumber,notes)" +
+        "VALUES (" + incubatorId + ",\"" + containers + "\",\"" + d1 + "\",\"" + d2 + "\",\"" + d3 + "\",\"" + responsible+"\","
+        + NoFailedHatching + "," + totalEggNumber + "," + brokenEggNumber + ",\"" + notes + "\")";
     console.log(query);
-    verifyID(db_path, "Batch", id).then(function (results) {
-        console.log(results.rows.length);
-        if (results.rows.length) {
-            dialog.showMessageBox({
-                title: "Id error",
-                message: "Batch Id must be unique. Please try a different one.",
-                buttons: ['Close']
-            });
-        } else {
-            const DB = new sqlite3.Database(db_path, function (err) {
-                if (err) {
+
+        const DB = new sqlite3.Database(db_path, function (err) {
+            if (err) {
+                dialog.showMessageBox({
+                    title: "Connection to database fails",
+                    message: "The APP can not connect to the database, contact the developer to fix this problem .",
+                    buttons: ['OK']
+                });
+            }
+        });
+        DB.run(query, function (err) {
+            if (err) {
+                if (action === "add") {
                     dialog.showMessageBox({
-                        title: "Connection to database fails",
-                        message: "The APP can not connect to the database, contact the developer to fix this problem .",
-                        buttons: ['OK']
+                        title: "Something went wrong",
+                        message: "An error occurred while trying to add the batch. Please try again.",
+                        buttons: ['Close']
+                    });
+                } else if (action === "edit") {
+                    dialog.showMessageBox({
+                        title: "Something went wrong",
+                        message: "An error occurred while trying to edit the batch. Please try again.",
+                        buttons: ['Close']
                     });
                 }
-            });
-            DB.run(query, function (err) {
-                if (err) {
-                    if (action === "add") {
-                        dialog.showMessageBox({
-                            title: "Something went wrong",
-                            message: "An error occurred while trying to add the batch. Please try again.",
-                            buttons: ['Close']
-                        });
-                    } else if (action === "edit") {
-                        dialog.showMessageBox({
-                            title: "Something went wrong",
-                            message: "An error occurred while trying to edit the batch. Please try again.",
-                            buttons: ['Close']
-                        });
-                    }
 
-                } else {
-                    if (action === "add") {
-                        $('#loader_batch_add').hide();
-                        $('#batch_id').val('');
-                        $('#incubator_id').val('');
-                        $('#batch_start_date').val('');
-                        $('#batch_17_date').val('');
-                        $('#batch_4_date').val('');
-                        $('#responsible').formSelect();
-                        $('#state').formSelect();
-                        $('#egg_plaques_number').val('');
-                        $('#egg_number').val('');
-                        $('#broken_egg_number').val('');
-                        $('#notes').val('');
-                        dialog.showMessageBox({
-                            title: "Status Message",
-                            message: "Batch was successfully added.",
-                            buttons: ['OK']
-                        });
-                        $('#loader_batch_add').hide();
-                        $('#loader_batch_add').fadeOut();
-                        document.getElementById("add-batch").classList.add("hidden");
-                    } else if (action === "edit") {
-                        $('#edit-incubator_id').val('');
-                        $('#edit-batch_start_date').val('');
-                        $('#edit-batch_17_date').val('');
-                        $('#edit-batch_4_date').val('');
-                        $('#edit-responsible').formSelect();
-                        $('#edit-state').formSelect();
-                        $('#edit-egg_plaques_number').val('');
-                        $('#edit-egg_number').val('');
-                        $('#edit-broken_egg_number').val('');
-                        $('#edit-notes').val('');
-                        dialog.showMessageBox({
-                            title: "Status Message",
-                            message: "Batch was successfully updated.",
-                            buttons: ['OK']
-                        });
-                        $('#edit-loader_batch_add').hide();
-                        $('#edit-loader_batch_add').fadeOut();
-                    }
-
+            } else {
+                if (action === "add") {
+                    $('#loader_batch_add').hide();
+                    $('#container_id').val('');
+                    $('#incubator_id').val('');
+                    $('#batch_start_date').val('');
+                    $('#batch_17_date').val('');
+                    $('#batch_4_date').val('');
+                    $('#responsible').formSelect();
+                    $('#NoFailedHatching').val('');
+                    $('#egg_number').val('');
+                    $('#broken_egg_number').val('');
+                    $('#notes').val('');
+                    dialog.showMessageBox({
+                        title: "Status Message",
+                        message: "Batch was successfully added.",
+                        buttons: ['OK']
+                    });
+                    $('#loader_batch_add').hide();
+                    $('#loader_batch_add').fadeOut();
+                    document.getElementById("add-batch").classList.add("hidden");
+                } else if (action === "edit") {
+                    $('#edit-containers_id').val('');
+                    $('#edit-batch_start_date').val('');
+                    $('#edit-batch_17_date').val('');
+                    $('#edit-batch_4_date').val('');
+                    $('#edit-responsible').formSelect();
+                    $('#edit-NoFailedHatching').val('');
+                    $('#edit-egg_number').val('');
+                    $('#edit-broken_egg_number').val('');
+                    $('#edit-notes').val('');
+                    dialog.showMessageBox({
+                        title: "Status Message",
+                        message: "Batch was successfully updated.",
+                        buttons: ['OK']
+                    });
+                    $('#edit-loader_batch_add').hide();
+                    $('#edit-loader_batch_add').fadeOut();
                 }
-            });
-            DB.close();
-        }
-
-    });
-
+            }
+        });
+        DB.close();
 }
 
 function insertDataToUsers(email, name, mob1, mob2, address, image, password, fs) {
@@ -290,31 +275,31 @@ function readDataFromBatch(displayOption) {
                 let rowData = [];
                 rowData[0] = rows[i]['id'];
                 rowData[1] = rows[i]['incubatorId'];
-                rowData[2] = rows[i]['startingDate'];
-                let pastDate = new Date(rowData[2]);
-                rowData[3] = rows[i]['date17'];
-                rowData[4] = rows[i]['date21'];
-                rowData[5] = rows[i]['responsible'];
-                rowData[6] = rows[i]['state'];
-                rowData[7] = rows[i]['eggPlaques'];
+                rowData[2] = rows[i]['containers'];
+                rowData[3] = rows[i]['startingDate'];
+                let pastDate = new Date(rowData[3]);
+                rowData[4] = rows[i]['date17'];
+                rowData[5] = rows[i]['date21'];
+                rowData[6] = rows[i]['responsible'];
+                rowData[7] = rows[i]['NoFailedHatching'];
                 rowData[8] = rows[i]['totalEggNumber'];
                 rowData[9] = rows[i]['brokenEggNumber'];
                 rowData[10] = rows[i]['notes'];
                 rowData[11] = null;
                 /***edit dates***/
-                var d1 = rowData[2].split('T')[0];
-                var d2 = rowData[3].split('T')[0];
-                var d3 = rowData[4].split('T')[0];
-                var t1 = rowData[2].split('T')[1];
-                var t2 = rowData[3].split('T')[1];
-                var t3 = rowData[4].split('T')[1];
+                var d1 = rowData[3].split('T')[0];
+                var d2 = rowData[4].split('T')[0];
+                var d3 = rowData[5].split('T')[0];
+                var t1 = rowData[3].split('T')[1];
+                var t2 = rowData[4].split('T')[1];
+                var t3 = rowData[5].split('T')[1];
                 var completeDate1 = d1.toString() + ' At : ' + t1.toString();
                 var completeDate2 = d2.toString() + " At : " + t2.toString();
                 var completeDate3 = d3.toString() + " At : " + t3.toString();
-                rowData[3] = completeDate2;
-                rowData[4] = completeDate3;
+                rowData[4] = completeDate2;
+                rowData[5] = completeDate3;
                 if (displayOption === "All") {
-                    rowData[2] = completeDate1;
+                    rowData[3] = completeDate1;
                     $(target).DataTable().row.add(rowData).draw();
                 } else if (displayOption === "17") {
                     let delta = getTimeRemaining(pastDate, daysForStep1);
@@ -324,7 +309,6 @@ function readDataFromBatch(displayOption) {
                 } else if (displayOption === "21") {
                     let delta = getTimeRemaining(pastDate, daysForStep2);
                     if (delta.days < daysForStep2 - daysForStep1 && delta.days >= 0) {
-                        console.log("here");
                         $(target).DataTable().row.add(rowData).draw();
                     }
                 }
@@ -338,7 +322,7 @@ function readDataFromBatch(displayOption) {
                 $(target1).mouseenter(function () {
                     let info = $(this).parent();
                     if (info[0].cells[0].innerHTML !== 'No data available in table') {
-                        let startingDate = info[0].cells[2].innerHTML;
+                        let startingDate = info[0].cells[3].innerHTML;
                         trIndex = $(this).parent();
                         let div = '<div id="clockdiv">\n' +
                             '    <div>\n' +
@@ -365,7 +349,6 @@ function readDataFromBatch(displayOption) {
                         } else if (displayOption === "21") {
                             timer = getTimeRemaining(new Date(startingDate), daysForStep2);
                         }
-                        console.log(timer);
                         daysSpan.innerHTML = timer.days;
                         hoursSpan.innerHTML = ('0' + timer.hours).slice(-2);
                         minutesSpan.innerHTML = ('0' + timer.minutes).slice(-2);
@@ -458,11 +441,11 @@ function deleteBatch(id, action) {
                     console.log(err)
                 } else {
                     if (action !== "JUST_DELETE") {
-                        $('#edit-batch_id').val(results.rows[0]['id']);
+                        $('#edit-containers_id').val(results.rows[0]['containers']);
                         $('#edit-incubator_id').val(results.rows[0]['incubatorId']);
                         $('#edit-batch_start_date').val(results.rows[0]['startingDate']);
                         changeDate(1);//it will update dates .
-                        $('#edit-egg_plaques_number').val(results.rows[0]['eggPlaques']);
+                        $('#edit-NoFailedHatching').val(results.rows[0]['NoFailedHatching']);
                         $('#edit-egg_number').val(results.rows[0]['totalEggNumber']);
                         $('#edit-broken_egg_number').val(results.rows[0]['brokenEggNumber']);
                         $('#edit-notes').val(results.rows[0]['notes']);
@@ -602,7 +585,6 @@ function readDataFromWorkers() {
                     $("#workersList tr td").mouseleave(function () {
                         $(trIndex).find('td:last-child').html("&nbsp;");
                     });
-
                 }
             });
         }

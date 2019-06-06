@@ -167,18 +167,20 @@
                 </div>
 
                 <!----------------------------------------BATCH----------------------------------------------->
+
                 <div id="add-batch">
                     <div id="batch-wrap" class="z-depth-2">
                         <div class="batch-title">Add new batch</div>
                         <div class="batch-form">
                             <div class="input-field">
-                                <input id="batch_id" type="number">
-                                <label for="batch_id">Batch Id</label>
-                            </div>
-                            <div class="input-field">
                                 <input id="incubator_id" type="number">
                                 <label for="incubator_id">Incubator Id</label>
                             </div>
+                            <div class="input-field">
+                                <input id="container_id" type="text">
+                                <label for="container_id">Containers :</label>
+                            </div>
+
                             <!--to enter the date-->
                             <div>
                                 <label for="batch_start_date">Select the starting Date</label>
@@ -212,21 +214,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <label for="state">Batch State</label>
-                                <div class="input-field">
-                                    <select id="state">
-                                        <option value="0" disabled selected>Choose</option>
-                                        <option value="FIRST STEP">Not Ready</option>
-                                        <option value="FIRST STEP">First State (17 days)</option>
-                                        <option value="SECOND STEP">Second State (4 days)</option>
-                                        <option value="OVER">OVER</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="input-field">
-                                <input id="egg_plaques_number" type="number">
-                                <label for="egg_plaques_number">Egg Plaques Number</label>
+                                <input id="NoFailedHatching" type="number">
+                                <label for="NoFailedHatching">No failed hatching</label>
                             </div>
                             <div class="input-field">
                                 <input id="egg_number" type="number">
@@ -253,12 +243,12 @@
                         <div class="batch-title">Edit this batch</div>
                         <div class="batch-form">
                             <div class="input-field">
-                                <input id="edit-batch_id" type="text">
-                                <label for="edit-batch_id">Batch Id</label>
-                            </div>
-                            <div class="input-field">
                                 <input id="edit-incubator_id" type="text">
                                 <label for="edit-incubator_id">Incubator Id</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="edit-containers_id" type="text">
+                                <label for="edit-containers_id">containers :</label>
                             </div>
                             <!--to enter the date-->
                             <div>
@@ -293,21 +283,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <label for="edit-responsible">Batch State</label>
-                                <div class="input-field">
-                                    <select id="edit-state">
-                                        <option value="0" disabled selected>Choose</option>
-                                        <option value="FIRST STEP">Not Ready</option>
-                                        <option value="FIRST STEP">First State (17 days)</option>
-                                        <option value="SECOND STEP">Second State (4 days)</option>
-                                        <option value="OVER">OVER</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="input-field">
-                                <input id="edit-egg_plaques_number" type="text">
-                                <label for="edit-egg_plaques_number">Egg Plaques Number</label>
+                                <input id="edit-NoFailedHatching" type="text">
+                                <label for="edit-NoFailedHatching">No Failed Hatching</label>
                             </div>
                             <div class="input-field">
                                 <input id="edit-egg_number" type="text">
@@ -338,12 +316,12 @@
                             <tr>
                                 <th>Batch Id</th>
                                 <th>Incubator Id</th>
+                                <th>Containers</th>
                                 <th class="dates">StartingDate</th>
                                 <th class="dates">DateAfter 17 days</th>
                                 <th class="dates">DateAfter 21 days</th>
                                 <th>Responsible</th>
-                                <th>State</th>
-                                <th>Plaques Number</th>
+                                <th>No Failed Hatching</th>
                                 <th>Total Egg Number</th>
                                 <th>Broken Egg Number</th>
                                 <th>Notes</th>
@@ -364,12 +342,12 @@
                             <tr>
                                 <th>Batch Id</th>
                                 <th>Incubator Id</th>
+                                <th>Containers</th>
                                 <th>Starting Date</th>
                                 <th>DateAfter 17 days</th>
                                 <th>DateAfter 21 days</th>
                                 <th>Responsible</th>
-                                <th>State</th>
-                                <th>Plaques Number</th>
+                                <th>No Failed Hatching</th>
                                 <th>Total Egg Number</th>
                                 <th>Broken Egg Number</th>
                                 <th>Notes</th>
@@ -390,12 +368,12 @@
                             <tr>
                                 <th>Batch Id</th>
                                 <th>Incubator Id</th>
+                                <th>Containers</th>
                                 <th>Starting Date</th>
                                 <th>DateAfter 17 days</th>
                                 <th>DateAfter 21 days</th>
                                 <th>Responsible</th>
-                                <th>State</th>
-                                <th>Plaques Number</th>
+                                <th>No Failed Hatching</th>
                                 <th>Total Egg Number</th>
                                 <th>Broken Egg Number</th>
                                 <th>Notes</th>
@@ -535,7 +513,6 @@
                         </table>
                     </div>
                 </div>
-
                 <!-------------------------------------Stats----------------------------------------->
 
                 <section id="counter-stats" class="wow fadeInRight" data-wow-duration="1.4s">
