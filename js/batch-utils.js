@@ -5,7 +5,7 @@ function setUpButtons() {
     $("#tableAll tr td").mouseenter(function () {
         let info = $(this).parent();
         let id = info[0].cells[0].innerHTML;
-        window.value = id;//global var to store the fucking id
+        window.value = id;
         trIndex = $(this).parent();
         let div = '<div class="btn-group pull-right">\n' +
             '    <button id="bEdit" type="button" class="btn btn-sm btn-default" onclick="batchEdit();"><span\n' +

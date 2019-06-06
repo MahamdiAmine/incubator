@@ -41,9 +41,6 @@ CREATE TABLE IF NOT EXISTS Tasks (
         workerID INTEGER  NOT NULL,
         FOREIGN KEY(workerID) REFERENCES Workers(workerId));  
 `;
-    // CONSTRAINT worker_Id FOREIGN KEY (workerID)
-    //   REFERENCES Workers(workerId) ON UPDATE CASCADE ON DELETE CASCADE);
-
 
     const DB = new sqlite3.Database(db_path, function (err) {
         if (err) {
@@ -558,12 +555,58 @@ function readDataFromWorkers() {
                 rowData[3] = rows[i]['workerAddress'];
                 rowData[4] = rows[i]['workerMob1'];
                 rowData[5] = rows[i]['workerMob2'];
-                console.log(rowData);
+                rowData[6] = null;
                 $("#workerTable").DataTable().row.add(rowData).draw();
             }
+            var trIndex = null;
+            $("#workerTable tr td").mouseenter(function () {
+                let info = $(this).parent();
+                if (info[0].cells[0].innerHTML !== 'No data available in table') {
+                    trIndex = $(this).parent();
+                    let worker_id = info[0].cells[0].innerHTML;
+                    let div = '<div id="clockdiv">\n' +
+                        '    <div>\n' +
+                        '        <span class="days" id="days"></span>\n' +
+                        '        <div class="smalltext">DA</div>\n' +
+                        '    </div>\n' +
+                        '</div>';
+                    $(trIndex).find("td:last-child").html(div);
+                    var clock = document.getElementById("clockdiv");
+                    var allCosts = clock.querySelector('.days');
+                    let query = "SELECT cost from Tasks where isPaid=\"NO\" and workerID=" + worker_id;
+                    const DB = new sqlite3.Database(db_path, function (err) {
+                        if (err) {
+                            dialog.showMessageBox({
+                                title: "Something went wrong",
+                                message: "database connection problem. Please try again or try reloading the app.",
+                                buttons: ['Close']
+                            });
+                        }
+                    });
+                    DB.all(query, function (err, rows) {
+                        if (err) {
+                            dialog.showMessageBox({
+                                title: "Something went wrong",
+                                message: "We can calculate all the costs for this worker. Please try again or try reloading the app.",
+                                buttons: ['Close']
+                            });
+                        } else {
+                            let totalCosts = 0;
+                            console.log(rows);
+                            for (var i = 0; i < rows.length; i++) totalCosts += rows[i]['cost'];
+                            allCosts.innerHTML = totalCosts.toString();
+
+                        }
+                    });
+                    DB.close();
+                    $("#workersList tr td").mouseleave(function () {
+                        $(trIndex).find('td:last-child').html("&nbsp;");
+                    });
+
+                }
+            });
         }
     });
-    DB.close();
 }
 
 function insertDataToTasks(taskWorker, task_date, taskInfo, task_cost, paid) {
@@ -674,8 +717,10 @@ function readDataFromTasks() {
                 rowData[4] = rows[i]['cost'];
                 rowData[5] = rows[i]['isPaid'];
                 rowData[6] = rows[i]['PaidDate'];
+                rowData[7] = null;
                 $("#tasksTable").DataTable().row.add(rowData).draw();
             }
+            setUpTasksButtons();
         }
     });
     DB.close();
@@ -702,17 +747,47 @@ function fillWorkers() {
             });
         } else {
             console.log(rows);
-            // let option;
             let select = document.getElementById('taskWorker');
             for (let i = 0; i < rows.length; i++) {
-                // let option = document.createElement('option');
-                // option.value = option.text = rows[i]['fullName'];
-                // select.options[select.options.length] = new Option(rows[i]['fullName'], rows[i]['fullName']);
-                select.options[select.options.length] = new Option(i, i);
-                // select.add(option);
+                select.options[select.options.length] = new Option(rows[i]['fullName'], rows[i]['fullName']);
+
             }
         }
     });
     DB.close();
 
+}
+
+
+function payTask_db(id) {
+    let date = new Date();
+    date = date.toString().slice(0, 24);
+    let query = "UPDATE Tasks \n" +
+        "   SET PaidDate = \"" + date + "\", isPaid = \"YES\"WHERE taskId=\"" + id + "\";";
+    console.log(query);
+    const DB = new sqlite3.Database(db_path, function (err) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Connection to database fails",
+                message: "The APP can not connect to the database, contact the developer to fix this problem .",
+                buttons: ['OK']
+            });
+        }
+    });
+    DB.run(query, function (err) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "An error occurred while trying to make the task paid . Please try again.",
+                buttons: ['Close']
+            });
+            // console.log(err);
+        } else {
+            dialog.showMessageBox({
+                title: "Status Message",
+                message: "the Task is now paid.",
+                buttons: ['OK']
+            });
+        }
+    });
 }
