@@ -1,0 +1,62 @@
+
+#tasksTable {
+    background-color: #fff;
+    min-height: 600px;
+    width: 90%;
+    margin: 40px auto;
+    border-top: 4px solid #e8e8e8;
+}
+
+#tasksTable .section-title {
+    color: #e57373;
+    /*color: grey;*/
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 15px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+#tasksTable .table_wrap {
+    width: 90%;
+    margin: 15px auto;
+    overflow: auto;
+}
+
+#tasksTable input {
+    border: 2px solid #eee;
+}
+
+#tasksTable #example_length {
+    display: none;
+}
+
+#tasksTable input:focus {
+    border: 2px solid #eee !important;
+    box-shadow: none !important;
+}
+
+#tasksTable #example1_length {
+    display: none;
+}
+
+/*the hover */
+#tasksTable tr:hover {
+    background-color: #ffff99;
+}
+
+#tasksTable th td {
+    text-align: center;
+}
+
+table.dataTable thead .sorting sorting_asc {
+    text-align: center;
+}
+
+#tasksTable tr:last-child td:not(.options) {
+    border-bottom: 1px solid;
+}
+
+#tasksTable .options {
+    background: white;
+    border: none;
+}

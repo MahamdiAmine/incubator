@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/batch.css">
+    <link rel="stylesheet" href="css/workersAndTasks.css">
+    <link rel="stylesheet" href="css/tasksTables.css">
+    <link rel="stylesheet" href="css/workersTables.css">
     <link rel="stylesheet" href="css/stats.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -34,11 +37,11 @@
         <div class="signin-text">Hello! Sign in and start managing your incubator.</div>
         <div class="form">
             <div class="input-field">
-                <input id="email" type="text">
-                <label for="email">Email</label>
+                <input id="email" type="text" value="aminov@esi.dz">
+                <label for="email">Email </label>
             </div>
             <div class="input-field">
-                <input id="password" type="password">
+                <input id="password" type="password" value="aminov@esi.dz">
                 <label for="password">Password</label>
             </div>
             <button id="signin-submit" class="btn waves-effect waves-light purple accent-1" type="submit" name="action">
@@ -129,6 +132,16 @@
                         <li id="view-batch-btn">View All Batches</li>
                         <li id="view-batch17-btn">Batches in First step</li>
                         <li id="view-batch21-btn">Batches in Second step</li>
+                    </ul>
+                </div>
+                //users ans tasks
+                <button class="collapse-btn" id="usersAndTasks-nav">Workers && Tasks</button>
+                <div class="content">
+                    <ul>
+                        <li id="add-worker-btn">Add A Worker</li>
+                        <li id="add-task-btn">Add Task</li>
+                        <li id="view-workers-btn">Workers list</li>
+                        <li id="view-tasks-btn">Tasks list</li>
                     </ul>
                 </div>
                 <button class="collapse-btn" id="contacts-nav">Quick Contacts</button>
@@ -396,6 +409,132 @@
                     </div>
                 </div>
 
+                <!---------------------------Users and Tasks----------------------------------------->
+                <div id="add-worker">
+                    <div id="worker-wrap" class="z-depth-2">
+                        <div class="worker-title">Add new Worker</div>
+                        <div class="worker-form">
+                            <div class="input-field">
+                                <input id="workerName_id" type="text">
+                                <label for="workerName_id">Worker's Full name </label>
+                            </div>
+                            <div class="input-field">
+                                <input id="workerAddress_id" type="text">
+                                <label for="workerAddress_id">Worker's Address</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="workerMobile_id" type="text">
+                                <label for="workerMobile_id">Worker's Mobile 1</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="workerMobile2_id" type="text">
+                                <label for="workerMobile2_id">worker's Mobile 2</label>
+                            </div>
+                            <!--to enter the date-->
+                            <div>
+                                <label for="worker_start_date">Select the starting Date</label>
+                                <div class="input-field">
+                                    <input id="worker_start_date" type="datetime-local"/>
+                                </div>
+                            </div>
+                            <img id="loader_worker_add" class="loader-small" src="images/loader-small.gif" height="100"
+                                 width="100">
+                            <button id="worker-add-submit" class="btn waves-effect waves-light blue">Save</button>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="add-task">
+                    <div id="task-wrap" class="z-depth-2">
+                        <div class="task-title">Add new Task</div>
+                        <div class="task-form">
+                            <div>
+                                <label for="taskWorker">Task for the Worker</label>
+                                <div class="input-field">
+                                    <select id="taskWorker">
+                                        <!--<option value="0" >Choose</option>-->
+                                        <!--<option value="Addi Fouaz">Addi Fouaz</option>-->
+                                        <!--<option value="Mahamdi Amine">Mahamdi Amine</option>-->
+                                        <!--<option value="Other">Other</option>-->
+                                        <!--<option value="Others">Others</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <!--to enter the date-->
+                            <div>
+                                <label for="task_date">Task Date</label>
+                                <div class="input-field">
+                                    <input id="task_date" type="datetime-local"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="taskInfo">Task's details</label>
+                                <div class="input-field">
+                                    <input id="taskInfo" type="text"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="task_cost">Task Cost</label>
+                                <div class="input-field">
+                                    <input id="task_cost" type="number"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="paid">Paid or Not</label>
+                                <div class="input-field">
+                                    <select id="paid">
+                                        <option value="0" disabled selected>Is It A Paid Task ?</option>
+                                        <option value="YES">YES</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <img id="loader_task_add" class="loader-small" src="images/loader-small.gif" height="100"
+                                 width="100">
+                            <button id="task-add-submit" class="btn waves-effect waves-light blue">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="workersList" class="z-depth-2">
+                    <div class="section-title">Workers List</div>
+                    <div class="table_wrap">
+                        <table id="workerTable" class="display" data-page-length='15'>
+                            <thead>
+                            <tr>
+                                <th>Worker Id</th>
+                                <th>Worker's Full name</th>
+                                <th>Worker's Starting Date</th>
+                                <th>Worker's Starting Address</th>
+                                <th>Worker's Phone Number 2</th>
+                                <th>Worker's Phone Number</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="tasksList" class="z-depth-2">
+                    <div class="section-title">Tasks List</div>
+                    <div class="table_wrap">
+                        <table id="tasksTable" class="display" data-page-length='15'>
+                            <thead>
+                            <tr>
+                                <th>Task Id</th>
+                                <th>Task's Worker</th>
+                                <th>Task's date</th>
+                                <th>Tasks's details</th>
+                                <th>Tasks's cost</th>
+                                <th>Paid ?</th>
+                                <th>Paid Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <!-------------------------------------Stats----------------------------------------->
 
                 <section id="counter-stats" class="wow fadeInRight" data-wow-duration="1.4s">
@@ -454,6 +593,8 @@
 <script src="js/controls/viewBatch.js"></script>
 <script src="js/controls/editBatch.js"></script>
 <script src="js/controls/printBatch.js"></script>
+<script src="js/controls/addWorker.js"></script>
+<script src="js/controls/workersList.js"></script>
 
 <script>
     // global vars
@@ -478,15 +619,10 @@
         db_path = './db/frloum.db';
     }
     console.log("Mode = " + mode);
-    console.log("db path = " + db_path);
     console.log("app path = " + appPath);
-    console.log("dir name = " + __dirname);
-    console.log("remote.app.getAppPath(): ", remote.app.getAppPath());
-    console.log("remote.app.getPath('appData'): ", remote.app.getPath('appData'));
 
-    // You can also require other files to run in this process
-    // require('./renderer.js');
     require('./js/authentication/authentication.js');
+    require('./js/database/db');
 
     $(document).ready(function () {
         $('select').formSelect();
@@ -499,12 +635,18 @@
     });
 
     $(document).ready(function () {
-
+        // createDB();
+        // readDataFromTasks();
+        // exit(878);
         document.getElementById("add-batch").classList.add("hidden");
         document.getElementById("edit-batch").classList.add("hidden");
         document.getElementById("view-batch").classList.add("hidden");
         document.getElementById("view-batch17").classList.add("hidden");
         document.getElementById("view-batch21").classList.add("hidden");
+        document.getElementById("add-worker").classList.add("hidden");
+        document.getElementById("add-task").classList.add("hidden");
+        document.getElementById("workersList").classList.add("hidden");
+        document.getElementById("tasksList").classList.add("hidden");
         document.getElementById("counter-stats").classList.add("hidden");
 
     });

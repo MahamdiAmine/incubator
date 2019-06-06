@@ -99,16 +99,25 @@ $('#add-batch-btn').click(function () {
     $('#edit-batch').fadeOut();
     $('#view-batch17').fadeOut();
     $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
     $('#counter-stats').fadeOut();
     $('#add-batch').delay(500).fadeIn();
     document.getElementById("edit-batch").classList.add("hidden");
     document.getElementById("view-batch").classList.add("hidden");
     document.getElementById("view-batch17").classList.add("hidden");
     document.getElementById("view-batch21").classList.add("hidden");
-    document.getElementById("counter-stats").classList.remove("hidden");
+    document.getElementById("add-worker").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.add("hidden");
     document.getElementById("add-batch").classList.remove("hidden");
     $('#dashboard-nav').removeClass('actv');
     $('#batch-nav').addClass('actv');
+    $('#usersAndTasks-nav').removeClass('actv');
     $('#contacts-nav').removeClass('actv');
 });
 
@@ -119,6 +128,10 @@ $('#view-batch-btn').click(function () {
     $('#view-batch').fadeOut();
     $('#view-batch17').fadeOut();
     $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
     $('#counter-stats').fadeOut();
     $('#view-batch').delay(500).fadeIn();
     document.getElementById("add-batch").classList.add("hidden");
@@ -126,9 +139,14 @@ $('#view-batch-btn').click(function () {
     document.getElementById("view-batch17").classList.add("hidden");
     document.getElementById("view-batch21").classList.add("hidden");
     document.getElementById("counter-stats").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.remove("hidden");
     document.getElementById("view-batch").classList.remove("hidden");
     $('#dashboard-nav').removeClass('actv');
     $('#batch-nav').addClass('actv');
+    $('#usersAndTasks-nav').removeClass('actv');
     $('#contacts-nav').removeClass('actv');
     document.getElementById("batch_4_date").classList.add("hidden");
     document.getElementById("batch_17_date").classList.add("hidden");
@@ -141,6 +159,10 @@ $('#view-batch17-btn').click(function () {
     $('#view-batch').fadeOut();
     $('#view-batch17').fadeOut();
     $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
     $('#counter-stats').fadeOut();
     $('#view-batch17').delay(500).fadeIn();
     document.getElementById("add-batch").classList.add("hidden");
@@ -148,9 +170,14 @@ $('#view-batch17-btn').click(function () {
     document.getElementById("view-batch").classList.add("hidden");
     document.getElementById("view-batch21").classList.add("hidden");
     document.getElementById("counter-stats").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.remove("hidden");
     document.getElementById("view-batch17").classList.remove("hidden");
     $('#dashboard-nav').removeClass('actv');
     $('#batch-nav').addClass('actv');
+    $('#usersAndTasks-nav').removeClass('actv');
     $('#contacts-nav').removeClass('actv');
     document.getElementById("batch_4_date").classList.add("hidden");
     document.getElementById("batch_17_date").classList.add("hidden");
@@ -163,6 +190,10 @@ $('#view-batch21-btn').click(function () {
     $('#view-batch').fadeOut();
     $('#view-batch17').fadeOut();
     $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
     $('#counter-stats').fadeOut();
     $('#view-batch21').delay(500).fadeIn();
     document.getElementById("add-batch").classList.add("hidden");
@@ -170,9 +201,14 @@ $('#view-batch21-btn').click(function () {
     document.getElementById("view-batch").classList.add("hidden");
     document.getElementById("view-batch17").classList.add("hidden");
     document.getElementById("counter-stats").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.remove("hidden");
     document.getElementById("view-batch21").classList.remove("hidden");
     $('#dashboard-nav').removeClass('actv');
     $('#batch-nav').addClass('actv');
+    $('#usersAndTasks-nav').removeClass('actv');
     $('#contacts-nav').removeClass('actv');
     document.getElementById("batch_4_date").classList.add("hidden");
     document.getElementById("batch_17_date").classList.add("hidden");
@@ -186,17 +222,141 @@ $("#show-stats-btn").click(function () {
     $('#view-batch17').fadeOut();
     $('#view-batch21').fadeOut();
     $('#counter-stats').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
     $('#counter-stats').delay(500).fadeIn();
     document.getElementById("add-batch").classList.add("hidden");
     document.getElementById("edit-batch").classList.add("hidden");
     document.getElementById("view-batch").classList.add("hidden");
     document.getElementById("view-batch17").classList.add("hidden");
     document.getElementById("view-batch21").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.remove("hidden");
     document.getElementById("counter-stats").classList.remove("hidden");
     $('#dashboard-nav').removeClass('actv');
+    $('#usersAndTasks-nav').removeClass('actv');
     $('#batch-nav').removeClass('actv');
     $('#contacts-nav').addClass('actv');
     document.getElementById("batch_4_date").classList.add("hidden");
     document.getElementById("batch_17_date").classList.add("hidden");
 });
+
+/*workers and tasks*/
+// add worker
+$('#add-worker-btn').click(function () {
+    $('#view-batch').fadeOut();
+    $('#edit-batch').fadeOut();
+    $('#view-batch17').fadeOut();
+    $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
+    $('#counter-stats').fadeOut();
+    $('#add-worker').delay(500).fadeIn();
+    document.getElementById("edit-batch").classList.add("hidden");
+    document.getElementById("view-batch").classList.add("hidden");
+    document.getElementById("view-batch17").classList.add("hidden");
+    document.getElementById("view-batch21").classList.add("hidden");
+    document.getElementById("add-worker").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.add("hidden");
+    document.getElementById("add-worker").classList.remove("hidden");
+    $('#dashboard-nav').removeClass('actv');
+    $('#batch-nav').removeClass('actv');
+    $('#usersAndTasks-nav').addClass('actv');
+    $('#contacts-nav').removeClass('actv');
+});
+
+// add task
+$('#add-task-btn').click(function () {
+    $('#view-batch').fadeOut();
+    $('#edit-batch').fadeOut();
+    $('#view-batch17').fadeOut();
+    $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
+    $('#counter-stats').fadeOut();
+    $('#add-task').delay(500).fadeIn();
+    fillWorkers();
+    document.getElementById("edit-batch").classList.add("hidden");
+    document.getElementById("view-batch").classList.add("hidden");
+    document.getElementById("view-batch17").classList.add("hidden");
+    document.getElementById("view-batch21").classList.add("hidden");
+    document.getElementById("add-worker").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.add("hidden");
+    document.getElementById("add-task").classList.remove("hidden");
+    $('#dashboard-nav').removeClass('actv');
+    $('#batch-nav').removeClass('actv');
+    $('#usersAndTasks-nav').addClass('actv');
+    $('#contacts-nav').removeClass('actv');
+});
+
+// workers list
+$('#view-workers-btn').click(function () {
+    $('#view-batch').fadeOut();
+    $('#edit-batch').fadeOut();
+    $('#view-batch17').fadeOut();
+    $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
+    $('#counter-stats').fadeOut();
+    $('#workersList').delay(500).fadeIn();
+    document.getElementById("edit-batch").classList.add("hidden");
+    document.getElementById("view-batch").classList.add("hidden");
+    document.getElementById("view-batch17").classList.add("hidden");
+    document.getElementById("view-batch21").classList.add("hidden");
+    document.getElementById("add-worker").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.add("hidden");
+    document.getElementById("workersList").classList.remove("hidden");
+    $('#dashboard-nav').removeClass('actv');
+    $('#batch-nav').removeClass('actv');
+    $('#usersAndTasks-nav').addClass('actv');
+    $('#contacts-nav').removeClass('actv');
+});
+
+// tasks list
+$('#view-tasks-btn').click(function () {
+    $('#view-batch').fadeOut();
+    $('#edit-batch').fadeOut();
+    $('#view-batch17').fadeOut();
+    $('#view-batch21').fadeOut();
+    $('#add-worker').fadeOut();
+    $('#add-task').fadeOut();
+    $('#workersList').fadeOut();
+    $('#tasksList').fadeOut();
+    $('#counter-stats').fadeOut();
+    $('#tasksList').delay(500).fadeIn();
+    document.getElementById("edit-batch").classList.add("hidden");
+    document.getElementById("view-batch").classList.add("hidden");
+    document.getElementById("view-batch17").classList.add("hidden");
+    document.getElementById("view-batch21").classList.add("hidden");
+    document.getElementById("add-worker").classList.add("hidden");
+    document.getElementById("add-task").classList.add("hidden");
+    document.getElementById("workersList").classList.add("hidden");
+    document.getElementById("tasksList").classList.add("hidden");
+    document.getElementById("counter-stats").classList.add("hidden");
+    document.getElementById("tasksList").classList.remove("hidden");
+    $('#dashboard-nav').removeClass('actv');
+    $('#batch-nav').removeClass('actv');
+    $('#usersAndTasks-nav').addClass('actv');
+    $('#contacts-nav').removeClass('actv');
+});
+
 

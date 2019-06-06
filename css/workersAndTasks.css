@@ -1,0 +1,82 @@
+#add-worker #worker-wrap {
+    min-height: 500px;
+    min-width: 600px;
+    max-width: 800px;
+    background-color: #fff;
+    margin: 60px auto;
+    border-left: 50px solid #4996ec;
+    padding: 40px;
+}
+
+#add-task #task-wrap {
+    min-height: 500px;
+    min-width: 600px;
+    max-width: 800px;
+    background-color: #fff;
+    margin: 60px auto;
+    border-left: 50px solid #49ec99;
+    padding: 40px;
+}
+
+#worker-wrap .worker-title {
+    color: #4996ec;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#task-wrap .task-title {
+    color: #49ec99;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#worker-wrap .worker-form .input-field {
+    width: 80% !important;
+    margin-top: 30px;
+}
+
+#task-wrap .task-form .input-field {
+    width: 80% !important;
+    margin-top: 30px;
+}
+
+#worker-wrap .input-field input:focus + label {
+    color: #4996ec !important;
+    font-weight: bold;
+    font-size: 14px!important;
+}
+
+#task-wrap .input-field input:focus + label {
+    color: #4996ec !important;
+    font-weight: bold;
+}
+
+#worker-wrap .input-field input:focus {
+    border-bottom: 1px solid #4996ec !important;
+    box-shadow: 0 1px 0 0 #4996ec !important
+}
+
+#task-wrap .input-field input:focus {
+    border-bottom: 1px solid #4996ec !important;
+    box-shadow: 0 1px 0 0 #4996ec !important
+}
+
+#worker-wrap .input-field textarea:focus + label {
+    color: #4996ec !important;
+    font-weight: bold;
+}
+
+#task-wrap .input-field textarea:focus + label {
+    color: #4996ec !important;
+    font-weight: bold;
+}
+
+#worker-wrap .input-field textarea:focus {
+    border-bottom: 1px solid #4996ec !important;
+    box-shadow: 0 1px 0 0 #4996ec !important
+}
+
+#task-wrap .input-field textarea:focus {
+    border-bottom: 1px solid #4996ec !important;
+    box-shadow: 0 1px 0 0 #4996ec !important
+}

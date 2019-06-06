@@ -23,7 +23,28 @@ CREATE TABLE IF NOT EXISTS Batch (
     totalEggNumber integer NOT NULL,
     brokenEggNumber integer NOT NULL,
     notes text NOT NULL
-);`;
+);
+CREATE TABLE IF NOT EXISTS Workers (
+        workerId INTEGER PRIMARY KEY AUTOINCREMENT,
+        fullName TEXT unique,
+        workerAddress TEXT,
+        workerMob1 TEXT,
+        workerMob2 TEXT,
+        workerDate text);
+CREATE TABLE IF NOT EXISTS Tasks (
+        taskId INTEGER PRIMARY KEY AUTOINCREMENT,
+        taskDate TEXT,
+        taskInfo TEXT,
+        cost integer,
+        isPaid TEXT,
+        PaidDate text,
+        workerID INTEGER  NOT NULL,
+        FOREIGN KEY(workerID) REFERENCES Workers(workerId));  
+`;
+    // CONSTRAINT worker_Id FOREIGN KEY (workerID)
+    //   REFERENCES Workers(workerId) ON UPDATE CASCADE ON DELETE CASCADE);
+
+
     const DB = new sqlite3.Database(db_path, function (err) {
         if (err) {
             console.log(err);
@@ -381,7 +402,6 @@ var readRecordsFromMediaTable = function (callback) {
     });
 };
 
-
 var verifyID = function (DB_PATH, table, primaryKey, dialog) {
     return new Promise(function (resolve, reject) {
         var db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READONLY);
@@ -467,52 +487,232 @@ function deleteBatch(id, action) {
 
 }
 
-// function deleteBatch(id) {
-//     let query = "DELETE FROM Batch WHERE ID =" + id;
-//     console.log(query);
-//     verifyID(db_path, "Batch", id).then(function (results) {
-//         console.log(results.rows.length);
-//         if (results.rows.length) {
-//             console.log("exists");
-//             const DB = new sqlite3.Database(db_path, function (err) {
-//                 if (err) {
-//                     dialog.showMessageBox({
-//                         title: "Connection to database fails",
-//                         message: "The APP can not connect to the database, contact the developer to fix this problem .",
-//                         buttons: ['OK']
-//                     });
-//                 }
-//             });
-//             DB.run(query, function (err) {
-//                 if (err) {
-//                     dialog.showMessageBox({
-//                         title: "Something went wrong",
-//                         message: "An error occurred while trying to add the batch. Please try again.",
-//                         buttons: ['Close']
-//                     });
-//                     console.log(err)
-//                 } else {
-//                     $('#edit-batch_id').val(results.rows[0]['id']);
-//                     $('#edit-incubator_id').val(results.rows[0]['incubatorId']);
-//                     $('#edit-batch_start_date').val(results.rows[0]['startingDate']);
-//                     changeDate(1);//it will update dates .
-//                     $('#edit-egg_plaques_number').val(results.rows[0]['eggPlaques']);
-//                     $('#edit-egg_number').val(results.rows[0]['totalEggNumber']);
-//                     $('#edit-broken_egg_number').val(results.rows[0]['brokenEggNumber']);
-//                     $('#edit-notes').val(results.rows[0]['notes']);
-//                     $('#edit-batch').delay(500).fadeIn();
-//                 }
-//             });
-//
-//         } else {
-//             dialog.showMessageBox({
-//                 title: "Something went wrong (error)",
-//                 message: "We couldn't find the  batch. Please try again or try reloading the app.",
-//                 buttons: ['OK']
-//             });
-//         }
-//
-//
-//     });
-//
-// }
+function insertDataToWorkers(fullName, date, address, mob1, mob2) {
+    let query = "INSERT into Workers(fullName,workerAddress,workerMob1,workerMob2,workerDate)" +
+        "VALUES (\"" + fullName + "\",\"" + address + "\",\"" + mob1 + "\",\"" + mob2 + "\",\"" + date + "\")";
+    console.log(query);
+
+    const DB = new sqlite3.Database(db_path, function (err) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Connection to database fails",
+                message: "The APP can not connect to the database, contact the developer to fix this problem .",
+                buttons: ['OK']
+            });
+        }
+    });
+    DB.run(query, function (err) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "An error occurred while trying to add the worker. Please try again.",
+                buttons: ['Close']
+            });
+
+        } else {
+            $('#loader_worker_add').hide();
+            $('#workerName_id').val('');
+            $('#workerAddress_id').val('');
+            $('#workerMobile_id').val('');
+            $('#workerMobile2_id').val('');
+            $('#worker_start_date').val('');
+            dialog.showMessageBox({
+                title: "Status Message",
+                message: "Worker was successfully added.",
+                buttons: ['OK']
+            });
+            $('#loader_worker_add').fadeOut();
+            // fillWorkers();
+            document.getElementById("add-worker").classList.add("hidden");
+
+        }
+    });
+    DB.close();
+
+}
+
+function readDataFromWorkers() {
+    let query = "SELECT * from Workers ";
+    const DB = new sqlite3.Database(db_path, function (err) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "An error occurred while tryings to access batches. Please try again or try reloading the app.",
+                buttons: ['Close']
+            });
+        }
+    });
+    DB.all(query, function (err, rows) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "We can not add this Worker. Please try again or try reloading the app.",
+                buttons: ['Close']
+            });
+        } else {
+            for (var i = 0; i < rows.length; i++) {
+                let rowData = [];
+                rowData[0] = rows[i]['workerId'];
+                rowData[1] = rows[i]['fullName'];
+                rowData[2] = rows[i]['workerDate'];
+                rowData[3] = rows[i]['workerAddress'];
+                rowData[4] = rows[i]['workerMob1'];
+                rowData[5] = rows[i]['workerMob2'];
+                console.log(rowData);
+                $("#workerTable").DataTable().row.add(rowData).draw();
+            }
+        }
+    });
+    DB.close();
+}
+
+function insertDataToTasks(taskWorker, task_date, taskInfo, task_cost, paid) {
+    let fullName = "aminov";
+    getWorkerID(fullName).then(function (results) {
+        console.log(results.rows.length);
+        console.log(results.rows);
+        if (!results.rows.length) {
+            dialog.showErrorBox("Task's worker is unknown ", "please reload the APP.");
+        } else {
+            let workerId = results.rows[0]['workerId'];
+            let query = "INSERT into Tasks (workerID,taskDate,taskInfo,cost,isPaid)" +
+                "VALUES (" + workerId + ",\"" + task_date + "\",\"" + taskInfo + "\"," + task_cost + ",\"" + paid + "\")";
+            console.log(query);
+            const DB = new sqlite3.Database(db_path, function (err) {
+                if (err) {
+                    dialog.showMessageBox({
+                        title: "Connection to database fails",
+                        message: "The APP can not connect to the database, contact the developer to fix this problem .",
+                        buttons: ['OK']
+                    });
+                }
+            });
+            DB.run(query, function (err) {
+                if (err) {
+                    dialog.showMessageBox({
+                        title: "Something went wrong",
+                        message: "An error occurred while trying to add the task. Please try again.",
+                        buttons: ['Close']
+                    });
+                    console.log(err)
+                } else {
+                    $('#loader_task_add').hide();
+                    $('#taskWorker').val('');
+                    $('#task_date').val('');
+                    $('#taskInfo').val('');
+                    $('#task_cost').val('');
+                    $('#paid').val('');
+                    dialog.showMessageBox({
+                        title: "Status Message",
+                        message: "the Task was successfully added.",
+                        buttons: ['OK']
+                    });
+                    $('#loader_task_add').fadeOut();
+                    document.getElementById("add-task").classList.add("hidden");
+                }
+            });
+            DB.close();
+        }
+
+    });
+};
+
+var getWorkerID = function (workerFullName) {
+    return new Promise(function (resolve, reject) {
+        var db = new sqlite3.Database(db_path, sqlite3.OPEN_READONLY);
+        let query = "SELECT workerID from Workers where (fullName=\"" + workerFullName + "\")";
+        let responseObj;
+        db.all(query, function cb(err, rows) {
+            if (err) {
+                responseObj = {
+                    'error': err
+                };
+                dialog.showMessageBox({
+                    title: "Connection to database fails",
+                    message: "The APP can not connect to the database, contact the developer to fix this problem .",
+                    buttons: ['OK']
+                });
+                reject(responseObj);
+            } else {
+                responseObj = {
+                    rows: rows
+                };
+                resolve(responseObj);
+            }
+            db.close();
+        });
+    });
+};
+
+function readDataFromTasks() {
+    let query = "SELECT * from Tasks ";
+    const DB = new sqlite3.Database(db_path, function (err) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "We could not access the database. Please try again or try reloading the app.",
+                buttons: ['Close']
+            });
+        }
+    });
+    DB.all(query, function (err, rows) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "An error occurred while tryings to access Tasks. Please try again or try reloading the app.",
+                buttons: ['Close']
+            });
+
+        } else {
+            console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                let rowData = [];
+                rowData[0] = rows[i]['taskId'];
+                rowData[1] = "mee";
+                rowData[2] = rows[i]['taskDate'];
+                rowData[3] = rows[i]['taskInfo'];
+                rowData[4] = rows[i]['cost'];
+                rowData[5] = rows[i]['isPaid'];
+                rowData[6] = rows[i]['PaidDate'];
+                $("#tasksTable").DataTable().row.add(rowData).draw();
+            }
+        }
+    });
+    DB.close();
+}
+
+function fillWorkers() {
+
+    let query = "SELECT fullName from Workers ";
+    const DB = new sqlite3.Database(db_path, function (err) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "An error occurred while tryings to access batches. Please try again or try reloading the app.",
+                buttons: ['Close']
+            });
+        }
+    });
+    DB.all(query, function (err, rows) {
+        if (err) {
+            dialog.showMessageBox({
+                title: "Something went wrong",
+                message: "We can not read data from  Worker table. Please try again or try reloading the app.",
+                buttons: ['Close']
+            });
+        } else {
+            console.log(rows);
+            // let option;
+            let select = document.getElementById('taskWorker');
+            for (let i = 0; i < rows.length; i++) {
+                // let option = document.createElement('option');
+                // option.value = option.text = rows[i]['fullName'];
+                // select.options[select.options.length] = new Option(rows[i]['fullName'], rows[i]['fullName']);
+                select.options[select.options.length] = new Option(i, i);
+                // select.add(option);
+            }
+        }
+    });
+    DB.close();
+
+}

@@ -33,7 +33,7 @@ function batchDelete() {
 }
 
 // create a PDF file
-function createPDF(date1, date2, date3, incID, responsible, plaquesNumber, totalEggNumber) {
+function createPDF(date1, date2, date3, incID, responsible, plaquesNumber, totalEggNumber,brokenEggNumber) {
 
     console.log(arguments);
     const JsPDF = require('jspdf');
@@ -63,8 +63,8 @@ function createPDF(date1, date2, date3, incID, responsible, plaquesNumber, total
         theme: "striped",
         columnStyles: {europe: {halign: 'center'}}, // European countries centered
         margin: {top: 200, down: 140},
-        head: [['Total Plaques number', 'Total Egg Number']],
-        body: [[plaquesNumber.toString(), totalEggNumber.toString()]]
+        head: [['Total Plaques number', 'Total Egg Number'],'Broken Egg Number'],
+        body: [[plaquesNumber.toString(), totalEggNumber.toString(),brokenEggNumber.toString()]]
     });
     doc.setFont("times");
     doc.setFontType("italic");

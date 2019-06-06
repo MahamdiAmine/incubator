@@ -1,0 +1,62 @@
+
+#workersList {
+    background-color: #fff;
+    min-height: 600px;
+    width: 90%;
+    margin: 40px auto;
+    border-top: 4px solid #e8e8e8;
+}
+
+#workersList .section-title {
+    color: #e57373;
+    /*color: grey;*/
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 15px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+#workersList .table_wrap {
+    width: 90%;
+    margin: 15px auto;
+    overflow: auto;
+}
+
+#workersList input {
+    border: 2px solid #eee;
+}
+
+#workersList #example_length {
+    display: none;
+}
+
+#workersList input:focus {
+    border: 2px solid #eee !important;
+    box-shadow: none !important;
+}
+
+#workersList #example1_length {
+    display: none;
+}
+
+/*the hover */
+#workerTable tr:hover {
+    background-color: #ffff99;
+}
+
+#workerTable th td {
+    text-align: center;
+}
+
+table.dataTable thead .sorting sorting_asc {
+    text-align: center;
+}
+
+#workerTable tr:last-child td:not(.options) {
+    border-bottom: 1px solid;
+}
+
+#workerTable .options {
+    background: white;
+    border: none;
+}
