@@ -8,3 +8,5 @@ package-lock.json
 db/
 images/
 engine/
+passwd/
+couchdb/

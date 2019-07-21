@@ -81,7 +81,7 @@ function createPDF(date1, date2, date3, incID, responsible, NoFailedHatching, to
     doc.setFont("courier");
     doc.setFontType("bold");
     doc.setTextColor(199, 21, 133);
-    doc.text(210, 190, rate.toString().slice(0, 5)+ " %");
+    doc.text(210, 190, rate.toString().slice(0, 5) + " %");
     doc.save('Report N ' + incID.toString());
 }
 

@@ -41,7 +41,7 @@
 
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
-		define( ['jquery'], function ( $ ) {
+		define( ['js/required/jquery'], function ($ ) {
 			return factory( $, window, document );
 		} );
 	}
@@ -56,8 +56,8 @@
 
 			if ( ! $ ) {
 				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
+					require('js/required/jquery') :
+					require('js/required/jquery')( root );
 			}
 
 			return factory( $, root, root.document );
