@@ -143,29 +143,20 @@
                         <li id="view-tasks-btn">Tasks list</li>
                     </ul>
                 </div>
-                <button class="collapse-btn" id="contacts-nav">Quick Contacts</button>
+                <button class="collapse-btn" id="contacts-nav">Quick Statistics</button>
                 <div class="content">
                     <ul>
                         <li id="show-stats-btn">Stats</li>
-                        <li>Other Section</li>
-                        <li>Something</li>
+<!--                        <li>About the App</li>-->
                     </ul>
                 </div>
             </div>
             <div class="col s10 side-main">
-
                 <div class="side-header z-depth-1">
                     <img class="logo-img" src="images/company-logo.png" height="60" width="180">
-                    <!--<div class="hello-img"><img class="" src="images/doc.png" height="50" width="50"></div>-->
                     <div class="hello-img"><img class="" id="user-image" height="50" width="50"></div>
                     <div class="hello-name">Hello, Mr. <span class="doc-name"></span></div>
-                    <!--<div class="input-field col s2" style="float: right; width: 200px; margin-top: 17px;">-->
-                    <!--<select id="chamber-select">-->
-                    <!--<option value="" disabled selected style="color:#333ddd!important;">Choose Chamber</option>-->
-                    <!--</select>-->
-                    <!--</div>-->
                 </div>
-
                 <!----------------------------------------BATCH----------------------------------------------->
 
                 <div id="add-batch">
@@ -421,20 +412,16 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="add-task">
                     <div id="task-wrap" class="z-depth-2">
                         <div class="task-title">Add new Task</div>
                         <div class="task-form">
+
                             <div>
                                 <label for="taskWorker">Task for the Worker</label>
                                 <div class="input-field">
-                                    <select id="taskWorker">
-                                        <!--<option value="0" >Choose</option>-->
-                                        <!--<option value="Addi Fouaz">Addi Fouaz</option>-->
-                                        <!--<option value="Mahamdi Amine">Mahamdi Amine</option>-->
-                                        <!--<option value="Other">Other</option>-->
-                                        <!--<option value="Others">Others</option>-->
-                                    </select>
+                                    <input id="taskWorker" type="text"/>
                                 </div>
                             </div>
                             <!--to enter the date-->
@@ -472,6 +459,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="workersList" class="z-depth-2">
                     <div class="section-title">Workers List</div>
                     <div class="table_wrap">
@@ -482,8 +470,8 @@
                                 <th>Worker's Full name</th>
                                 <th>Worker's Starting Date</th>
                                 <th>Worker's Starting Address</th>
-                                <th>Worker's Phone Number 2</th>
                                 <th>Worker's Phone Number</th>
+                                <th>Worker's Phone Number 2</th>
                                 <th>Worker's All Costs</th>
                             </tr>
                             </thead>
@@ -492,6 +480,7 @@
                         </table>
                     </div>
                 </div>
+
                 <div id="tasksList" class="z-depth-2">
                     <div class="section-title">Tasks List</div>
                     <div class="table_wrap">
@@ -513,42 +502,32 @@
                         </table>
                     </div>
                 </div>
-                <!-------------------------------------Stats----------------------------------------->
 
+                <!-------------------------------------Stats----------------------------------------->
                 <section id="counter-stats" class="wow fadeInRight" data-wow-duration="1.4s">
                     <div class="container">
                         <div class="row">
-
                             <div class="col-lg-3 stats">
                                 <i class="fa fa-code" aria-hidden="true"></i>
-                                <div class="counting" data-count="900000">0</div>
-                                <h5>Lines of code</h5>
+                                <div class="counting" id="total"></div>
+                                <h5>Total Eggs</h5>
                             </div>
 
                             <div class="col-lg-3 stats">
                                 <i class="fa fa-check" aria-hidden="true"></i>
-                                <div class="counting" data-count="280">0</div>
-                                <h5>Projects done</h5>
+                                <div class="counting" id="rate"></div>
+                                <h5>Success rate </h5>
                             </div>
 
                             <div class="col-lg-3 stats">
                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                <div class="counting" data-count="75">0</div>
-                                <h5>Happy clients</h5>
+                                <div class="counting" id="workers"></div>
+                                <h5>Workers</h5>
                             </div>
-
-                            <div class="col-lg-3 stats">
-                                <i class="fa fa-coffee" aria-hidden="true"></i>
-                                <div class="counting" data-count="999">0</div>
-                                <h5>Cups of coffee</h5>
-                            </div>
-
-
                         </div>
                         <!-- end row -->
                     </div>
                     <!-- end container -->
-
                 </section>
 
             </div>
@@ -557,7 +536,6 @@
 </div>
 
 <script>    window.$ = window.jQuery = require("./js/jquery.js");</script>
-
 <script src="js/jquery.js"></script>
 <script src="js/mat.js"></script>
 <script src="js/datatables.js"></script>
@@ -574,10 +552,8 @@
 <script src="js/controls/printBatch.js"></script>
 <script src="js/controls/addWorker.js"></script>
 <script src="js/controls/workersList.js"></script>
-
 <script>
     // global vars
-
     const fs = require('fs');
     const isDev = require('electron-is-dev');
     const remote = require('electron').remote;
@@ -586,8 +562,8 @@
     let appPath = app.getAppPath();
     let db_path = '';
     let mode = '';
-    let daysForStep1 = 17;
-    let daysForStep2 = 21;
+    const daysForStep1 = 17;
+    const daysForStep2 = 21;
     if (isDev) {
         mode = "dev";
         db_path = './db/frloum.db';
@@ -599,7 +575,6 @@
     }
     console.log("Mode = " + mode);
     console.log("app path = " + appPath);
-
     require('./js/authentication/authentication.js');
     require('./js/database/db');
 
@@ -607,16 +582,12 @@
         $('select').formSelect();
     });
 
-    $('select[name=example_length]').formSelect();
-
     $(document).ready(function () {
         $('.collapsible').collapsible();
     });
 
     $(document).ready(function () {
         // createDB();
-        // readDataFromTasks();
-        // exit(878);
         document.getElementById("add-batch").classList.add("hidden");
         document.getElementById("edit-batch").classList.add("hidden");
         document.getElementById("view-batch").classList.add("hidden");
@@ -627,7 +598,6 @@
         document.getElementById("workersList").classList.add("hidden");
         document.getElementById("tasksList").classList.add("hidden");
         document.getElementById("counter-stats").classList.add("hidden");
-
     });
 </script>
 </body>

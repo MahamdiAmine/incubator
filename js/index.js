@@ -243,6 +243,8 @@ $("#show-stats-btn").click(function () {
     $('#contacts-nav').addClass('actv');
     document.getElementById("batch_4_date").classList.add("hidden");
     document.getElementById("batch_17_date").classList.add("hidden");
+
+    stats();
 });
 
 /*workers and tasks*/
@@ -286,7 +288,6 @@ $('#add-task-btn').click(function () {
     $('#tasksList').fadeOut();
     $('#counter-stats').fadeOut();
     $('#add-task').delay(500).fadeIn();
-    fillWorkers();
     document.getElementById("edit-batch").classList.add("hidden");
     document.getElementById("view-batch").classList.add("hidden");
     document.getElementById("view-batch17").classList.add("hidden");

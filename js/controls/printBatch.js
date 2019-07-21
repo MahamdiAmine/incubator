@@ -20,7 +20,7 @@ function printBatch() {
         } else {
             console.log(rows);
             createPDF(rows[0]['startingDate'], rows[0]['date17'], rows[0]['date21'],
-                rows[0]['incubatorId'], rows[0]['responsible'], rows[0]['eggPlaques'], rows[0]['totalEggNumber'],rows[0]['brokenEggNumber']);
+                rows[0]['incubatorId'], rows[0]['responsible'], rows[0]['NoFailedHatching'], rows[0]['totalEggNumber'],rows[0]['brokenEggNumber']);
         }
 
     });

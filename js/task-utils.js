@@ -1,11 +1,10 @@
 //********************** pay this task
 function setUpTasksButtons() {
-
     var trIndex = null;
     $("#tasksTable tr td").mouseenter(function () {
         let info = $(this).parent();
-        let id = info[0].cells[0].innerHTML;
-        if (info[0].cells[5].innerHTML === "NO") {
+        if (info[0].cells[0].innerText !== 'No data available in table') {
+            let id = info[0].cells[0].innerHTML;
             window.value = id;
             trIndex = $(this).parent();
             let div = '<div class="btn-group pull-right">\n' +
@@ -20,7 +19,6 @@ function setUpTasksButtons() {
     $("#tasksList tr td").mouseleave(function () {
         $(trIndex).find('td:last-child').html("&nbsp;");
     });
-
 }
 
 //pay a task

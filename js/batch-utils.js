@@ -33,7 +33,7 @@ function batchDelete() {
 }
 
 // create a PDF file
-function createPDF(date1, date2, date3, incID, responsible, plaquesNumber, totalEggNumber,brokenEggNumber) {
+function createPDF(date1, date2, date3, incID, responsible, NoFailedHatching, totalEggNumber, brokenEggNumber) {
 
     console.log(arguments);
     const JsPDF = require('jspdf');
@@ -63,16 +63,25 @@ function createPDF(date1, date2, date3, incID, responsible, plaquesNumber, total
         theme: "striped",
         columnStyles: {europe: {halign: 'center'}}, // European countries centered
         margin: {top: 200, down: 140},
-        head: [['Total Plaques number', 'Total Egg Number'],'Broken Egg Number'],
-        body: [[plaquesNumber.toString(), totalEggNumber.toString(),brokenEggNumber.toString()]]
+        head: [['Failed Hatching', 'Total Egg Number', 'Broken Egg Number']],
+        body: [[NoFailedHatching.toString(), totalEggNumber.toString(), brokenEggNumber.toString()]]
     });
     doc.setFont("times");
     doc.setFontType("italic");
-    doc.text(60, 190, 'The responsible :');
+    doc.text(30, 190, 'The responsible :');
     doc.setFont("courier");
     doc.setFontType("bold");
     doc.setTextColor(0, 0, 255);
-    doc.text(122, 190, responsible);
+    doc.text(90, 190, responsible);
+    let rate = totalEggNumber * 100 / (totalEggNumber + brokenEggNumber + NoFailedHatching);
+    doc.setFont("times");
+    doc.setFontType("italic");
+    doc.setTextColor(0, 0, 0);
+    doc.text(150, 190, 'The success rate ');
+    doc.setFont("courier");
+    doc.setFontType("bold");
+    doc.setTextColor(199, 21, 133);
+    doc.text(210, 190, rate.toString().slice(0, 5)+ " %");
     doc.save('Report N ' + incID.toString());
 }
 
