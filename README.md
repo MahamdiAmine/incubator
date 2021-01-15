@@ -41,7 +41,7 @@ Electron, child_process, python3 backend, sqlite3, jsPDF, spawn, file-exec, data
  $ npm start
 
 ```
-# In case of sqlite3 problem
+# If you face Sqlite3 problems
 -----
 ```
 npm install --save electron-rebuild
@@ -67,3 +67,7 @@ https://github.com/MahamdiAmine
 -----
 MIT licence:
 https://www.gnu.org/licenses/gpl-3.0
+
+# NOTE (Security issue) !!!
+-----
+ :( this project is full of XSS (Sorry i i hadn't the time to fix them )
